@@ -29,7 +29,11 @@ find_package(camera_info_manager REQUIRED)
 add_library(kinect_ros2_component SHARED src/kinect_ros2_component.cpp)
 target_compile_definitions(kinect_ros2_component
   PRIVATE "COMPOSITION_BUILDING_DLL")
-ament_target_dependencies(kinect_ros2_component 
+target_include_directories(kinect_ros2_component
+        PUBLIC BEFORE
+        ${Freenect_INCLUDE_DIRS}
+)
+ament_target_dependencies(kinect_ros2_component
   rclcpp
   sensor_msgs
   std_msgs
